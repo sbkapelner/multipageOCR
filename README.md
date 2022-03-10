@@ -2,8 +2,8 @@
 Performs OCR on PDFs and other file types using the tesseract library and ImageMagick.  
 
 # Dependencies
-Tesseract
-ImageMagick
+Tesseract 
+ImageMagick 
 (script will install these)  
 
 # Installation 

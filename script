@@ -1,0 +1,24 @@
+#/bin/bash
+> output.txt
+pdfFile=$1
+LANG=${2:-"eng"}
+DENSITY=${3:-100}
+#numberOfPages=$(/usr/local/bin/identify "$pdfFile" 2>/dev/null | wc -l | tr -d ' ') for non-posix
+numberOfPages=$(mdls -name kMDItemNumberOfPages -raw "$1")
+echo "Processing $numberOfPages page(s) from $pdfFile"..
+
+START=0
+## save $START, just in case if we need it later ##
+i=$START
+while [ $i -le $(($numberOfPages-1)) ]
+do
+    convert -quiet -density "$DENSITY" -quality 100 "$1[$i]" output.png
+    TEXT=$(tesseract "output.png" stdout 2>/dev/null -l "$LANG")
+    echo "$TEXT" >> "output.txt"
+    ((i = i + 1))
+    tput sc # save cursor
+    printf " $i/$numberOfPages"
+    tput rc # rc = restore cursor, el = erase to end of line
+done
+tput el
+echo "Done"

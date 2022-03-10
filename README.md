@@ -6,10 +6,12 @@ Tesseract
 ImageMagick
 (script will install these)  
 
-# Installation
+# Installation 
 Mac OSX  
 ./install.sh
 
 # Usage
 ./script  
-(if on linux uncomment page count line)
+(if on Linux uncomment page count line)  
+
+Remember to change permissions for both scripts.
